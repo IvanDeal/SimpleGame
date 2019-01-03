@@ -48,6 +48,8 @@ namespace SimpleGame
         static bool headItemEquipped = false;
         static int headItemArmour;
 
+        public bool combatRunning = false;
+
         public Game()
         {
             /* This is the game constructor, create the rooms as we create the game */
@@ -102,6 +104,7 @@ namespace SimpleGame
                 Console.WriteLine("You are in the " + currentRoomName);
                 if (!roomList[currentRoomName].IsMonsterDead())
                 {
+                    combatRunning = true;
                     combat();
                 }
             }
@@ -109,6 +112,33 @@ namespace SimpleGame
 
         public void combat()
         {
+
+            while (combatRunning)
+            {
+                Console.WriteLine("You are in combat. What would you like to do?");
+                string combatInput = Console.ReadLine();
+                switch (combatInput)
+                {
+                    case "attack":
+                        break;
+                    case "defend":
+                        break;
+                    case "north":
+                    case "east":
+                    case "south":
+                    case "west":
+                    case "up":
+                    case "down":
+                        Console.WriteLine("If you try to run, the monster will kill you");
+                        break;
+                }
+
+                /*if (Monster hp = 0)
+                {
+                    combatRunning = false;
+
+                }*/
+            }
 
         }
 
@@ -252,6 +282,7 @@ namespace SimpleGame
 
         public void GameLoop()
         {
+            Player player = new Player();
 
             while (true)
             {
@@ -268,10 +299,6 @@ namespace SimpleGame
 
                 switch (convertedInput)
                 {
-                    case "attack":
-                        break;
-                    case "defend":
-                        break;
                     case "drop":
                         break;
                     case "equip":
