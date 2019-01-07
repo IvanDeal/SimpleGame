@@ -16,49 +16,25 @@ namespace SimpleGame
 
         //Weapon and item core variables
 
-        static string leftHandItemName;
-        static bool leftHandItemEquipped = false;
-        static int leftHandItemDamage;
-        static int leftHandItemArmour;
-
-        static string rightHandItemName;
-        static bool rightHandItemEquipped = false;
-        static int rightHandItemDamage;
-        static int rightHandItemArmour;
-
-        //Apparel variables
-
-        static string upperBodyItemName;
-        static bool upperBodyItemEquipped = false;
-        static int upperBodyItemArmour;
-
-        static string lowerBodyItemName;
-        static bool lowerBodyItemEquipped = false;
-        static int lowerBodyItemArmour;
-
-        static string armItemName;
-        static bool armItemEquipped = false;
-        static int armItemArmour;
-
-        static string legItemName;
-        static bool legItemEquipped = false;
-        static int legItemArmour;
-
-        static string headItemName;
-        static bool headItemEquipped = false;
-        static int headItemArmour;
-
         public bool combatRunning = false;
 
         public Game()
         {
             /* This is the game constructor, create the rooms as we create the game */
             loadRooms();
+            Player player = new Player();
         }
 
         private void loadRooms()
         {
-            Monster goblin = new Monster("Goblin", 5, 0, "Sword", null, null, null);
+            Monster goblin = null;
+            Random rnd = new Random();
+            int goblinappearence = rnd.Next(1, 3);
+            if (goblinappearence == 1)
+            {
+                goblin = new Monster("Goblin", 5, 0, "Sword", null, null, null);
+            }
+            //Monster goblin = new Monster("Goblin", 5, 0, "Sword", null, null, null);
             Monster dragon = new Monster("Dragon", 50, 20, "Bite", "Tail Whip", "Fire Breath", null);
 
             //Create Rooms
@@ -105,12 +81,12 @@ namespace SimpleGame
                 if (!roomList[currentRoomName].IsMonsterDead())
                 {
                     combatRunning = true;
-                    combat();
+                    Game.combat(Player, Monster);
                 }
             }
         }
 
-        public void combat()
+        public void combat(Player player, Monster monster)
         {
 
             while (combatRunning)
@@ -144,87 +120,87 @@ namespace SimpleGame
 
         public void checkStatus()
         {
-            if (leftHandItemEquipped == false)
+            if (Player.leftHandItemEquipped == false)
             {
                 Console.WriteLine("You have nothing equipped in your left hand");
             }
-            else if (leftHandItemDamage != 0)
+            else if (Player.leftHandItemDamage != 0)
             {
-                Console.WriteLine("You have " + leftHandItemName + " equipped.");
+                Console.WriteLine("You have " + Player.leftHandItemName + " equipped.");
                 Console.WriteLine("It cannot be used in combat");
             }
             else
             {
-                Console.WriteLine("You have " + leftHandItemName + " equipped.");
-                Console.WriteLine("It does " + leftHandItemDamage + " damage when attacking.");
-                Console.WriteLine("It provides " + leftHandItemArmour + " when blocking.");
+                Console.WriteLine("You have " + Player.leftHandItemName + " equipped.");
+                Console.WriteLine("It does " + Player.leftHandItemDamage + " damage when attacking.");
+                Console.WriteLine("It provides " + Player.leftHandItemArmour + " when blocking.");
             }
 
-            if (rightHandItemEquipped == false)
+            if (Player.rightHandItemEquipped == false)
             {
                 Console.WriteLine("You have nothing equipped in your right hand");
             }
-            else if (rightHandItemDamage != 0)
+            else if (Player.rightHandItemDamage != 0)
             {
-                Console.WriteLine("You have " + rightHandItemName + " equipped.");
+                Console.WriteLine("You have " + Player.rightHandItemName + " equipped.");
                 Console.WriteLine("It cannot be used in combat");
             }
             else
             {
-                Console.WriteLine("You have " + rightHandItemName + " equipped.");
-                Console.WriteLine("It does " + rightHandItemDamage + " damage when attacking.");
-                Console.WriteLine("It provides " + rightHandItemArmour + " when blocking.");
+                Console.WriteLine("You have " + Player.rightHandItemName + " equipped.");
+                Console.WriteLine("It does " + Player.rightHandItemDamage + " damage when attacking.");
+                Console.WriteLine("It provides " + Player.rightHandItemArmour + " when blocking.");
             }
 
-            if (upperBodyItemEquipped == false)
+            if (Player.upperBodyItemEquipped == false)
             {
                 Console.WriteLine("You have nothing equipped on your upper body.");
             }
             else
             {
-                Console.WriteLine("You are currently wearing " + upperBodyItemName + ".");
-                Console.WriteLine("It provides " + upperBodyItemArmour + " armour.");
+                Console.WriteLine("You are currently wearing " + Player.upperBodyItemName + ".");
+                Console.WriteLine("It provides " + Player.upperBodyItemArmour + " armour.");
             }
 
 
-            if (lowerBodyItemEquipped == false)
+            if (Player.lowerBodyItemEquipped == false)
             {
                 Console.WriteLine("You have nothing equipped on your lower body.");
             }
             else
             {
-                Console.WriteLine("You are currently wearing " + lowerBodyItemName + ".");
-                Console.WriteLine("It provides " + lowerBodyItemArmour + " armour.");
+                Console.WriteLine("You are currently wearing " + Player.lowerBodyItemName + ".");
+                Console.WriteLine("It provides " + Player.lowerBodyItemArmour + " armour.");
             }
 
-            if (armItemEquipped == false)
+            if (Player.armItemEquipped == false)
             {
                 Console.WriteLine("You are not wearing anything on your arms");
             }
             else
             {
-                Console.WriteLine("You are currently wearing " + armItemName + ".");
-                Console.WriteLine("It provides " + armItemArmour + " armour.");
+                Console.WriteLine("You are currently wearing " + Player.armItemName + ".");
+                Console.WriteLine("It provides " + Player.armItemArmour + " armour.");
             }
 
-            if (legItemEquipped == false)
+            if (Player.legItemEquipped == false)
             {
                 Console.WriteLine("You are not wearing anything on your legs");
             }
             else
             {
-                Console.WriteLine("You are currently wearing " + legItemName + ".");
-                Console.WriteLine("It provides " + legItemArmour + " armour.");
+                Console.WriteLine("You are currently wearing " + Player.legItemName + ".");
+                Console.WriteLine("It provides " + Player.legItemArmour + " armour.");
             }
 
-            if (headItemEquipped == false)
+            if (Player.headItemEquipped == false)
             {
                 Console.WriteLine("You are not wearing anything on your head");
             }
             else
             {
-                Console.WriteLine("You are currently wearing " + headItemName + ".");
-                Console.WriteLine("It provides " + headItemArmour + " armour.");
+                Console.WriteLine("You are currently wearing " + Player.headItemName + ".");
+                Console.WriteLine("It provides " + Player.headItemArmour + " armour.");
             }
 
         }
@@ -282,7 +258,7 @@ namespace SimpleGame
 
         public void GameLoop()
         {
-            Player player = new Player();
+            
 
             while (true)
             {
