@@ -41,7 +41,7 @@ namespace SimpleGame
             /* Each room will be created with their name and the names of the rooms connected */
             Room hallway = new Room("Hallway", "Kitchen", "empty", "empty", "empty", "empty", "empty", null);
             Room kitchen = new Room("Kitchen", "Lounge", "empty", "Hallway", "empty", "empty", "empty", goblin);
-            Room lounge = new Room("Lounge", "empty", "empty", "Kitchen", "empty", "empty", "empty", null);
+            Room lounge = new Room("Lounge", "empty", "empty", "Kitchen", "empty", "empty", "empty", dragon);
 
             /* Add rooms to the Dictionary, we'll need this later when changing rooms */
             roomList = new Dictionary<string, Room>();
@@ -69,6 +69,7 @@ namespace SimpleGame
         {
             /* Get the current room object */
             Room currentRoom = roomList[currentRoomName];
+            Monster currentMonster = roomList[currentRoomName].monster;
 
             /* Ask the room object what is in the entered direction */
             String roomMoveResult = currentRoom.TryToExit(direction);
@@ -81,12 +82,12 @@ namespace SimpleGame
                 if (!roomList[currentRoomName].IsMonsterDead())
                 {
                     combatRunning = true;
-                    Game.combat(Player, Monster);
+                    combat(currentMonster);
                 }
             }
         }
 
-        public void combat(Player player, Monster monster)
+        public void combat(Monster monster)
         {
 
             while (combatRunning)
