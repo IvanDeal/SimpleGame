@@ -23,6 +23,7 @@ namespace SimpleGame
             /* This is the game constructor, create the rooms as we create the game */
             loadRooms();
             Player player = new Player();
+
         }
 
         private void loadRooms()
@@ -72,7 +73,7 @@ namespace SimpleGame
             Room currentRoom = roomList[currentRoomName];
             Monster currentMonster = roomList[currentRoomName].monster;
             // need to bring in the player somehow 
-            Player currentPlayer = Game.player;
+            
             
 
             /* Ask the room object what is in the entered direction */
@@ -86,12 +87,12 @@ namespace SimpleGame
                 if (!roomList[currentRoomName].IsMonsterDead())
                 {
                     combatRunning = true;
-                    combat(currentMonster, player);
+                    combat(currentMonster);
                 }
             }
         }
 
-        public void combat(Monster monster, Player player)
+        public void combat(Monster monster)
         {
 
             while (combatRunning)
@@ -123,9 +124,9 @@ namespace SimpleGame
 
         }
 
-        public void checkStatus()
+       /* public void checkStatus()
         {
-            if (Player.leftHandItemEquipped == false)
+            if (Player.bLeftHandItemEquipped == false)
             {
                 Console.WriteLine("You have nothing equipped in your left hand");
             }
@@ -208,7 +209,7 @@ namespace SimpleGame
                 Console.WriteLine("It provides " + Player.headItemArmour + " armour.");
             }
 
-        }
+        }*/
 
         public void helpList()
         {
@@ -263,6 +264,8 @@ namespace SimpleGame
 
         public void GameLoop()
         {
+           
+           Player currentPlayer = new Player();
             
 
             while (true)
@@ -283,6 +286,7 @@ namespace SimpleGame
                     case "drop":
                         break;
                     case "equip":
+                        currentPlayer.bArmItemEquipped = true;
                         break;
                     case "examine":
                         break;
@@ -300,7 +304,7 @@ namespace SimpleGame
                     case "save":
                         break;
                     case "status":
-                        checkStatus();
+                        currentPlayer.checkStatus();
                         break;
                     case "take":
                         break;
