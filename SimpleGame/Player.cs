@@ -8,45 +8,90 @@ namespace SimpleGame
 {
     class Player
     {
-        public int playerHealth;
-        public int playerMagic;
-        public int playerWeaponDamage;
-        public int playerArmourValue;
+        public int iPlayerLevel;
+        public int iPlayerHealth;
+        public int iPlayerMagic;
+        public int iPlayerWeaponDamage;
+        public int iPlayerArmourValue;
 
-        public static string leftHandItemName;
-        public static bool leftHandItemEquipped = false;
-        public static int leftHandItemDamage;
-        public static int leftHandItemArmour;
+        public string sLeftHandItemName;
+        public bool bLeftHandItemEquipped;
+        public int iLeftHandItemDamage;
+        public int iLeftHandItemArmour;
 
-        public static string rightHandItemName;
-        public static bool rightHandItemEquipped = false;
-        public static int rightHandItemDamage;
-        public static int rightHandItemArmour;
+        public string sRightHandItemName;
+        public bool bRightHandItemEquipped;
+        public int iRightHandItemDamage;
+        public int iRightHandItemArmour;
 
         //Apparel variables
 
-        public static string upperBodyItemName;
-        public static bool upperBodyItemEquipped = false;
-        public static int upperBodyItemArmour;
+        public string sUpperBodyItemName;
+        public bool bUpperBodyItemEquipped;
+        public int iUpperBodyItemArmour;
 
-        public static string lowerBodyItemName;
-        public static bool lowerBodyItemEquipped = false;
-        public static int lowerBodyItemArmour;
+        public string sLowerBodyItemName;
+        public bool bLowerBodyItemEquipped;
+        public int iLowerBodyItemArmour;
 
-        public static string armItemName;
-        public static bool armItemEquipped = false;
-        public static int armItemArmour;
+        public string sArmItemName;
+        public bool bArmItemEquipped;
+        public int iArmItemArmour;
 
-        public static string legItemName;
-        public static bool legItemEquipped = false;
-        public static int legItemArmour;
+        public string sLegItemName;
+        public bool bLegItemEquipped;
+        public int iLegItemArmour;
 
-        public static string headItemName;
-        public static bool headItemEquipped = false;
-        public static int headItemArmour;
+        public string sHeadItemName;
+        public bool bHeadItemEquipped;
+        public int iHeadItemArmour;
 
         public Player()
         {
+            LoadPlayer();
+        }
+
+        public void LoadPlayer()
+        {
+            iPlayerLevel = 1;
+            iPlayerHealth = 5;
+            iPlayerMagic = 5;
+            iPlayerWeaponDamage = 1;
+            iPlayerArmourValue = 0;
+            sLeftHandItemName = "empty";
+            bLeftHandItemEquipped = false;
+            iLeftHandItemDamage = 0;
+            iLeftHandItemArmour = 0;
+            sRightHandItemName = "empty";
+            bRightHandItemEquipped = false; 
+            iRightHandItemDamage = 0;
+            iRightHandItemArmour = 0;
+            sUpperBodyItemName = "";
+            bUpperBodyItemEquipped = false;
+            iUpperBodyItemArmour = 0;
+            sLowerBodyItemName = "";
+            bLowerBodyItemEquipped = false;
+            iLowerBodyItemArmour = 0;
+            sArmItemName = "";
+            bArmItemEquipped = false;
+            iArmItemArmour = 0;
+            sLegItemName = "";
+            bLegItemEquipped = false;
+            iLegItemArmour = 0;
+            sHeadItemName = "";
+            bHeadItemEquipped = false;
+            iHeadItemArmour = 0;
+        }
+
+        public void calculatePlayerAttackValue()
+        {
+            iPlayerWeaponDamage = 1 + iLeftHandItemDamage + iRightHandItemDamage;
+
+        }
+
+        public void calculatePlayerArmourValue()
+        {
+            iPlayerArmourValue = 0 + iUpperBodyItemArmour + iLowerBodyItemArmour + iArmItemArmour + iLegItemArmour + iHeadItemArmour;
 
         }
 
@@ -54,6 +99,16 @@ namespace SimpleGame
         {
 
             
+        }
+
+        public void playerExploringControls()
+        {
+
+        }
+
+        public void playerCombatControls()
+        {
+
         }
 
     }

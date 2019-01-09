@@ -35,6 +35,7 @@ namespace SimpleGame
                 goblin = new Monster("Goblin", 5, 0, "Sword", null, null, null);
             }
             //Monster goblin = new Monster("Goblin", 5, 0, "Sword", null, null, null);
+
             Monster dragon = new Monster("Dragon", 50, 20, "Bite", "Tail Whip", "Fire Breath", null);
 
             //Create Rooms
@@ -70,6 +71,9 @@ namespace SimpleGame
             /* Get the current room object */
             Room currentRoom = roomList[currentRoomName];
             Monster currentMonster = roomList[currentRoomName].monster;
+            // need to bring in the player somehow 
+            Player currentPlayer = Game.player;
+            
 
             /* Ask the room object what is in the entered direction */
             String roomMoveResult = currentRoom.TryToExit(direction);
@@ -82,12 +86,12 @@ namespace SimpleGame
                 if (!roomList[currentRoomName].IsMonsterDead())
                 {
                     combatRunning = true;
-                    combat(currentMonster);
+                    combat(currentMonster, player);
                 }
             }
         }
 
-        public void combat(Monster monster)
+        public void combat(Monster monster, Player player)
         {
 
             while (combatRunning)
