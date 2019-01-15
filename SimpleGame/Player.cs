@@ -97,25 +97,12 @@ namespace SimpleGame
 
         }
 
+        //should this be in the game section? It probably needs the other data from the other objects to work right?
         public void playerAttack()
         {
 
 
             
-        }
-
-        public void playerExploringControls()
-        {
-
-
-
-        }
-
-        public void playerCombatControls()
-        {
-
-
-
         }
 
         public void checkStatus()

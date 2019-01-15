@@ -8,8 +8,13 @@ namespace SimpleGame
 {
     class Game
     {
+        private Player player;
+
         /* Variable to store game rooms */
         private Dictionary<string, Room> roomList;
+        private Dictionary<string, Item> itemList;
+        private Dictionary<string, Weapon> weaponList;
+        private Dictionary<string, Armour> armourList;
 
         /* Variable to store the room we are currently in */
         private string currentRoomName = "Hallway";
@@ -22,7 +27,10 @@ namespace SimpleGame
         {
             /* This is the game constructor, create the rooms as we create the game */
             loadRooms();
-            Player player = new Player();
+            loadItems();
+            loadWeapons();
+            loadArmour();
+            player = new Player();
 
         }
 
@@ -54,17 +62,69 @@ namespace SimpleGame
 
         private void loadItems()
         {
+            Item potion = new Item("Potion","Restores Health");
+            Item ether = new Item("Ether", "Restores Magic");
+            Item apple = new Item("Apple", "Juicy");
+            Item dagger = new Item("Dagger", "This item has many uses");
+            Item key = new Item("Key", "I wonder what this unlocks");
+
+            itemList = new Dictionary<string, Item>();
+            itemList.Add("Potion", potion);
+            itemList.Add("Ether", ether);
+            itemList.Add("Apple", apple);
+            itemList.Add("Dagger", dagger);
+            itemList.Add("Key", key);
 
         }
 
         private void loadWeapons()
         {
+            Weapon sword = new Weapon("Sword", "A basic iron sword", 1);
+            Weapon axe = new Weapon("Axe", "A basic iron axe", 2);
+            Weapon lance = new Weapon("Lance", "A Lance", 3);
 
+            weaponList = new Dictionary<string, Weapon>();
+            weaponList.Add("Sword", sword);
+            weaponList.Add("Axe", axe);
+            weaponList.Add("Lance", lance);
         }
 
         private void loadArmour()
         {
+            Armour leatherArmour = new Armour("Leather Armour", "A basic leather chest piece", 1, false, true, false, false, false);
+            Armour leatherLegs = new Armour("Leather Greaves","", 1, false, false, true, false, false);
+            Armour leatherGloves = new Armour("Leather Gloves", "", 1, false, false, false, false, true);
+            Armour leatherBoots = new Armour("Leather Boots", "", 1, false, false, false, true, false);
+            Armour leatherHelm = new Armour("Leather Helmet", "", 1, true, false, false, false, false);
 
+            Armour ironArmour = new Armour("Iron Armour", "An Iron breastplate", 3, false, true, false, false, false);
+            Armour ironLegs = new Armour("Iron Greaves","", 3,false, false, true, false, false);
+            Armour ironGloves = new Armour("Iron Gloves","", 2, false, false, false, false, true);
+            Armour ironBoots = new Armour("Iron Boots","", 2, false, false, false, true, false);
+            Armour ironHelm = new Armour("Iron Helm", "",2, true, false, false, false, false);
+
+            Armour steelArmour = new Armour("Steel Armour", "A Steel Breastplate", 5, false, true, false, false, false);
+            Armour steelLegs = new Armour("Steel Greaves", "A Steel Breastplate", 5, false, false, true, false, false);
+            Armour steelGloves = new Armour("Steel Gloves", "A Steel Breastplate", 5, false, false, false, false, true);
+            Armour steelBoots = new Armour("Steel Boots", "A Steel Breastplate", 5, false, false, false, true, false);
+            Armour steelHelm = new Armour("Steel Helm", "A Steel Breastplate", 5, true, false, false, false, false);
+
+            armourList = new Dictionary<string, Armour>();
+            armourList.Add("Leather Armour",leatherArmour);
+            armourList.Add("Leather Greavers",leatherLegs);
+            armourList.Add("Leather Gloves", leatherGloves);
+            armourList.Add("Leather Boots", leatherBoots);
+            armourList.Add("Leather Helm", leatherHelm);
+            armourList.Add("Iron Armour", ironArmour);
+            armourList.Add("Iron Greaves", ironLegs);
+            armourList.Add("Iron Gloves", ironGloves);
+            armourList.Add("Iron Boots", ironBoots);
+            armourList.Add("Iron Helm", ironHelm);
+            armourList.Add("Steel Armour", steelArmour);
+            armourList.Add("Steel Greaves", steelLegs);
+            armourList.Add("Steel Gloves", steelGloves);
+            armourList.Add("Steel Boots", steelBoots);
+            armourList.Add("Steel Helm", steelHelm);
         }
 
         private void AttemptRoomMove(string direction)
@@ -72,9 +132,6 @@ namespace SimpleGame
             /* Get the current room object */
             Room currentRoom = roomList[currentRoomName];
             Monster currentMonster = roomList[currentRoomName].monster;
-            // need to bring in the player somehow 
-            
-            
 
             /* Ask the room object what is in the entered direction */
             String roomMoveResult = currentRoom.TryToExit(direction);
@@ -87,12 +144,12 @@ namespace SimpleGame
                 if (!roomList[currentRoomName].IsMonsterDead())
                 {
                     combatRunning = true;
-                    combat(currentMonster);
+                    combat(currentMonster, player);
                 }
             }
         }
 
-        public void combat(Monster monster)
+        public void combat(Monster monster, Player player)
         {
 
             while (combatRunning)
@@ -114,102 +171,9 @@ namespace SimpleGame
                         Console.WriteLine("If you try to run, the monster will kill you");
                         break;
                 }
-
-                /*if (Monster hp = 0)
-                {
-                    combatRunning = false;
-
-                }*/
             }
 
         }
-
-       /* public void checkStatus()
-        {
-            if (Player.bLeftHandItemEquipped == false)
-            {
-                Console.WriteLine("You have nothing equipped in your left hand");
-            }
-            else if (Player.leftHandItemDamage != 0)
-            {
-                Console.WriteLine("You have " + Player.leftHandItemName + " equipped.");
-                Console.WriteLine("It cannot be used in combat");
-            }
-            else
-            {
-                Console.WriteLine("You have " + Player.leftHandItemName + " equipped.");
-                Console.WriteLine("It does " + Player.leftHandItemDamage + " damage when attacking.");
-                Console.WriteLine("It provides " + Player.leftHandItemArmour + " when blocking.");
-            }
-
-            if (Player.rightHandItemEquipped == false)
-            {
-                Console.WriteLine("You have nothing equipped in your right hand");
-            }
-            else if (Player.rightHandItemDamage != 0)
-            {
-                Console.WriteLine("You have " + Player.rightHandItemName + " equipped.");
-                Console.WriteLine("It cannot be used in combat");
-            }
-            else
-            {
-                Console.WriteLine("You have " + Player.rightHandItemName + " equipped.");
-                Console.WriteLine("It does " + Player.rightHandItemDamage + " damage when attacking.");
-                Console.WriteLine("It provides " + Player.rightHandItemArmour + " when blocking.");
-            }
-
-            if (Player.upperBodyItemEquipped == false)
-            {
-                Console.WriteLine("You have nothing equipped on your upper body.");
-            }
-            else
-            {
-                Console.WriteLine("You are currently wearing " + Player.upperBodyItemName + ".");
-                Console.WriteLine("It provides " + Player.upperBodyItemArmour + " armour.");
-            }
-
-
-            if (Player.lowerBodyItemEquipped == false)
-            {
-                Console.WriteLine("You have nothing equipped on your lower body.");
-            }
-            else
-            {
-                Console.WriteLine("You are currently wearing " + Player.lowerBodyItemName + ".");
-                Console.WriteLine("It provides " + Player.lowerBodyItemArmour + " armour.");
-            }
-
-            if (Player.armItemEquipped == false)
-            {
-                Console.WriteLine("You are not wearing anything on your arms");
-            }
-            else
-            {
-                Console.WriteLine("You are currently wearing " + Player.armItemName + ".");
-                Console.WriteLine("It provides " + Player.armItemArmour + " armour.");
-            }
-
-            if (Player.legItemEquipped == false)
-            {
-                Console.WriteLine("You are not wearing anything on your legs");
-            }
-            else
-            {
-                Console.WriteLine("You are currently wearing " + Player.legItemName + ".");
-                Console.WriteLine("It provides " + Player.legItemArmour + " armour.");
-            }
-
-            if (Player.headItemEquipped == false)
-            {
-                Console.WriteLine("You are not wearing anything on your head");
-            }
-            else
-            {
-                Console.WriteLine("You are currently wearing " + Player.headItemName + ".");
-                Console.WriteLine("It provides " + Player.headItemArmour + " armour.");
-            }
-
-        }*/
 
         public void helpList()
         {
@@ -254,7 +218,7 @@ namespace SimpleGame
 
         public void equipItem(string itemName)
         {
-
+            //Item currentItem = 
         }
 
         public static void exitGame()
@@ -263,10 +227,7 @@ namespace SimpleGame
         }
 
         public void GameLoop()
-        {
-           
-           Player currentPlayer = new Player();
-            
+        {   
 
             while (true)
             {
@@ -286,7 +247,7 @@ namespace SimpleGame
                     case "drop":
                         break;
                     case "equip":
-                        currentPlayer.bArmItemEquipped = true;
+                        player.bArmItemEquipped = true;
                         break;
                     case "examine":
                         break;
@@ -304,7 +265,7 @@ namespace SimpleGame
                     case "save":
                         break;
                     case "status":
-                        currentPlayer.checkStatus();
+                        player.checkStatus();
                         break;
                     case "take":
                         break;
