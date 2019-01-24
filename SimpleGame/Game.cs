@@ -23,6 +23,8 @@ namespace SimpleGame
 
         public bool combatRunning = false;
 
+        public string itemName;
+
         public Game()
         {
             /* This is the game constructor, create the rooms as we create the game */
@@ -111,7 +113,7 @@ namespace SimpleGame
 
             armourList = new Dictionary<string, Armour>();
             armourList.Add("Leather Armour",leatherArmour);
-            armourList.Add("Leather Greavers",leatherLegs);
+            armourList.Add("Leather Greaves",leatherLegs);
             armourList.Add("Leather Gloves", leatherGloves);
             armourList.Add("Leather Boots", leatherBoots);
             armourList.Add("Leather Helm", leatherHelm);
@@ -216,9 +218,60 @@ namespace SimpleGame
 
         }
 
-        public void equipItem(string itemName)
+        public void equipItem()
         {
-            //Item currentItem = 
+
+            Console.WriteLine("What would you like to equip?");
+            string equipItemInput = Console.ReadLine();
+            string validItemisArmour;
+            string validItemisWeapon;
+            string currentItem;
+
+            //body part of if
+            if (equipItemInput == "Leather Armour" || equipItemInput == "Iron Armour" || equipItemInput == "Steel Amrour")
+            {
+                player.sUpperBodyItemName = equipItemInput;
+                player.bUpperBodyItemEquipped = true;
+            }
+            //leg part of if
+            else if (equipItemInput == "Leather Greaves" || equipItemInput == "Iron Greaves" || equipItemInput == "Steel Greaves")
+            {
+                player.sLowerBodyItemName = equipItemInput;
+                player.bLegItemEquipped = true;
+            }
+            //head part of if
+            else if (equipItemInput == "Leather Helm" || equipItemInput == "Iron Helm" || equipItemInput == "Steel Helm")
+            {
+                player.sHeadItemName = equipItemInput;
+                player.bHeadItemEquipped = true;
+            }
+            //feet part of if
+            else if (equipItemInput == "Leather Boots" || equipItemInput == "Iron Boots" || equipItemInput == "Steel Boots")
+            {
+                player.sLegItemName = equipItemInput;
+                player.bLegItemEquipped = true;
+            }
+            //hand part of if
+            else if (equipItemInput == "Leather Gloves" || equipItemInput == "Iron Gloves" || equipItemInput == "Steel  Gloves")
+            {
+                player.sArmItemName = equipItemInput;
+                player.bArmItemEquipped = true;
+            }
+            //what happens when player trries to equip weapon
+            else if (equipItemInput == "Sword" || equipItemInput == "Axe" || equipItemInput == "Lance")
+            {
+
+            }
+            //what happens when player tries to equip non equippable item
+            else if (equipItemInput == "Apple" || equipItemInput == "Ether" || equipItemInput == "Apple" || equipItemInput == "Dagger" || equipItemInput == "Key")
+            {
+                Console.WriteLine("This item cannot be equipped");
+            }
+            //what happens when an invalid entry is tried
+            else
+            {
+                Console.WriteLine("Not a valid choice");
+            }
         }
 
         public static void exitGame()
@@ -227,7 +280,8 @@ namespace SimpleGame
         }
 
         public void GameLoop()
-        {   
+        {
+           
 
             while (true)
             {
@@ -247,7 +301,7 @@ namespace SimpleGame
                     case "drop":
                         break;
                     case "equip":
-                        player.bArmItemEquipped = true;
+                        equipItem();
                         break;
                     case "examine":
                         break;
