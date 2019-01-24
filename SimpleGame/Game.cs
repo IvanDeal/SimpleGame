@@ -23,7 +23,7 @@ namespace SimpleGame
 
         public bool combatRunning = false;
 
-        public string itemName;
+        public string currentItemName;
 
         public Game()
         {
@@ -220,18 +220,22 @@ namespace SimpleGame
 
         public void equipItem()
         {
+            
 
             Console.WriteLine("What would you like to equip?");
             string equipItemInput = Console.ReadLine();
-            string validItemisArmour;
-            string validItemisWeapon;
-            string currentItem;
+
+            currentItemName = equipItemInput;
+            Armour currentItem = armourList[currentItemName];
 
             //body part of if
             if (equipItemInput == "Leather Armour" || equipItemInput == "Iron Armour" || equipItemInput == "Steel Amrour")
             {
-                player.sUpperBodyItemName = equipItemInput;
+                player.sUpperBodyItemName = currentItem.sArmourName;
+                
+                //player.sUpperBodyItemName = equipItemInput;
                 player.bUpperBodyItemEquipped = true;
+                player.iUpperBodyItemArmour = currentItem.iArmourDefenceValue;
             }
             //leg part of if
             else if (equipItemInput == "Leather Greaves" || equipItemInput == "Iron Greaves" || equipItemInput == "Steel Greaves")
