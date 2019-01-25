@@ -191,6 +191,13 @@ namespace SimpleGame
                 Console.WriteLine("It provides " + iHeadItemArmour + " armour.");
             }
 
+            calculatePlayerArmourValue();
+            Console.WriteLine("");
+
+            Console.WriteLine("You currently have " + iPlayerArmourValue + " armour");
+
+            Console.WriteLine("");
+
         }
 
     }

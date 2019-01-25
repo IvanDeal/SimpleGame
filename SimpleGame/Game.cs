@@ -100,7 +100,7 @@ namespace SimpleGame
             Armour leatherHelm = new Armour("Leather Helmet", "", 1, true, false, false, false, false);
 
             Armour ironArmour = new Armour("Iron Armour", "An Iron breastplate", 3, false, true, false, false, false);
-            Armour ironLegs = new Armour("Iron Greaves","", 3,false, false, true, false, false);
+            Armour ironLegs = new Armour("Iron Greaves","", 3, false, false, true, false, false);
             Armour ironGloves = new Armour("Iron Gloves","", 2, false, false, false, false, true);
             Armour ironBoots = new Armour("Iron Boots","", 2, false, false, false, true, false);
             Armour ironHelm = new Armour("Iron Helm", "",2, true, false, false, false, false);
@@ -226,49 +226,68 @@ namespace SimpleGame
             string equipItemInput = Console.ReadLine();
 
             currentItemName = equipItemInput;
-            Armour currentItem = armourList[currentItemName];
+            
 
             //body part of if
-            if (equipItemInput == "Leather Armour" || equipItemInput == "Iron Armour" || equipItemInput == "Steel Amrour")
+            if (equipItemInput == "Leather Armour" || equipItemInput == "Iron Armour" || equipItemInput == "Steel Armour")
             {
+                Armour currentItem = armourList[currentItemName];
+
                 player.sUpperBodyItemName = currentItem.sArmourName;
                 
                 //player.sUpperBodyItemName = equipItemInput;
                 player.bUpperBodyItemEquipped = true;
                 player.iUpperBodyItemArmour = currentItem.iArmourDefenceValue;
+
             }
             //leg part of if
             else if (equipItemInput == "Leather Greaves" || equipItemInput == "Iron Greaves" || equipItemInput == "Steel Greaves")
             {
-                player.sLowerBodyItemName = equipItemInput;
-                player.bLegItemEquipped = true;
+                Armour currentItem = armourList[currentItemName];
+
+                player.sLowerBodyItemName = currentItem.sArmourName;
+                player.bLowerBodyItemEquipped = true;
+                player.iLowerBodyItemArmour = currentItem.iArmourDefenceValue;
+
             }
             //head part of if
             else if (equipItemInput == "Leather Helm" || equipItemInput == "Iron Helm" || equipItemInput == "Steel Helm")
             {
-                player.sHeadItemName = equipItemInput;
+                Armour currentItem = armourList[currentItemName];
+
+                player.sHeadItemName = currentItem.sArmourName;
                 player.bHeadItemEquipped = true;
+                player.iHeadItemArmour = currentItem.iArmourDefenceValue;
+ 
             }
             //feet part of if
             else if (equipItemInput == "Leather Boots" || equipItemInput == "Iron Boots" || equipItemInput == "Steel Boots")
             {
-                player.sLegItemName = equipItemInput;
+                Armour currentItem = armourList[currentItemName];
+
+                player.sLegItemName = currentItem.sArmourName;
                 player.bLegItemEquipped = true;
+                player.iLegItemArmour = currentItem.iArmourDefenceValue;
             }
             //hand part of if
             else if (equipItemInput == "Leather Gloves" || equipItemInput == "Iron Gloves" || equipItemInput == "Steel  Gloves")
             {
-                player.sArmItemName = equipItemInput;
+                Armour currentItem = armourList[currentItemName];
+
+                player.sArmItemName = currentItem.sArmourName;
                 player.bArmItemEquipped = true;
+                player.iArmItemArmour = currentItem.iArmourDefenceValue;
             }
             //what happens when player trries to equip weapon
             else if (equipItemInput == "Sword" || equipItemInput == "Axe" || equipItemInput == "Lance")
             {
+                Weapon currentItem = weaponList[currentItemName];
 
             }
             //what happens when player tries to equip non equippable item
             else if (equipItemInput == "Apple" || equipItemInput == "Ether" || equipItemInput == "Apple" || equipItemInput == "Dagger" || equipItemInput == "Key")
             {
+               
                 Console.WriteLine("This item cannot be equipped");
             }
             //what happens when an invalid entry is tried
@@ -276,6 +295,15 @@ namespace SimpleGame
             {
                 Console.WriteLine("Not a valid choice");
             }
+
+            Console.WriteLine("You equipped the " + equipItemInput);
+            Console.WriteLine("");
+
+        }
+
+        public void saveGame()
+        {
+
         }
 
         public static void exitGame()
@@ -321,6 +349,7 @@ namespace SimpleGame
                     case "load":
                         break;
                     case "save":
+                        saveGame();
                         break;
                     case "status":
                         player.checkStatus();
