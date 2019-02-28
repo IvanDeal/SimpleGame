@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace SimpleGame
 {
@@ -76,7 +77,6 @@ namespace SimpleGame
             itemList.Add("Apple", apple);
             itemList.Add("Dagger", dagger);
             itemList.Add("Key", key);
-
         }
 
         private void loadWeapons()
@@ -301,9 +301,30 @@ namespace SimpleGame
 
         }
 
-        public void saveGame()
+        public struct saveFile
         {
+            public string headItemName;
+            public string headItemValue;
+            public string thirdLine;
+        };
 
+        public void SaveGame()
+        {
+            saveFile SaveFile;
+
+            SaveFile.headItemName = player.sHeadItemName;
+            SaveFile.headItemValue = player.iHeadItemArmour.ToString();
+            SaveFile.thirdLine = "Last Piece of Test Data";
+       
+            string[] lines = { SaveFile. };
+
+            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "IvansSaveGameTest.txt")))
+            {
+                foreach (string line in SaveFile)
+                    outputFile.WriteLine(line);
+            }
         }
 
         public static void exitGame()
@@ -349,7 +370,7 @@ namespace SimpleGame
                     case "load":
                         break;
                     case "save":
-                        saveGame();
+                        SaveGame();
                         break;
                     case "status":
                         player.checkStatus();
