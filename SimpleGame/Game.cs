@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace SimpleGame
 {
@@ -52,9 +53,9 @@ namespace SimpleGame
 
             //Create Rooms
             /* Each room will be created with their name and the names of the rooms connected */
-            Room hallway = new Room("Hallway", "Kitchen", "empty", "empty", "empty", "empty", "empty", null);
-            Room kitchen = new Room("Kitchen", "Lounge", "empty", "Hallway", "empty", "empty", "empty", goblin);
-            Room lounge = new Room("Lounge", "empty", "empty", "Kitchen", "empty", "empty", "empty", dragon);
+            Room hallway = new Room("Hallway", "Kitchen", "empty", "empty", "empty", "empty", "empty", null, null);
+            Room kitchen = new Room("Kitchen", "Lounge", "empty", "Hallway", "empty", "empty", "empty", goblin, null);
+            Room lounge = new Room("Lounge", "empty", "empty", "Kitchen", "empty", "empty", "empty", dragon, null);
 
             /* Add rooms to the Dictionary, we'll need this later when changing rooms */
             roomList = new Dictionary<string, Room>();
@@ -301,30 +302,51 @@ namespace SimpleGame
 
         }
 
-        public struct saveFile
+        /*public struct SaveData
         {
             public string headItemName;
             public string headItemValue;
             public string thirdLine;
-        };
+        }
+
+        byte[] getBytes(SaveData SaveData)
+        {
+            int length = Marshal.SizeOf(SaveData);
+            byte[] arr = new byte[length];
+
+            IntPtr ptr = Marshal.AllocHGlobal(length);
+            Marshal.StructureToPtr(length, ptr, true);
+            Marshal.Copy(ptr, arr, 0, length);
+            Marshal.FreeHGlobal(ptr);
+
+            return arr;
+        }*/
 
         public void SaveGame()
         {
-            saveFile SaveFile;
+            /*SaveData SaveData;
 
-            SaveFile.headItemName = player.sHeadItemName;
-            SaveFile.headItemValue = player.iHeadItemArmour.ToString();
-            SaveFile.thirdLine = "Last Piece of Test Data";
-       
-            string[] lines = { SaveFile. };
+            SaveData.headItemName = player.sHeadItemName;
+            SaveData.headItemValue = player.iHeadItemArmour.ToString();
+            SaveData.thirdLine = "Last Piece of Test Data";*/
+
+            string headItemName;
+            string headItemValue;
+
+            string[] lines = { headItemName = player.sHeadItemName, headItemValue = player.iHeadItemArmour.ToString(), "Last Piece of Test" };
 
             string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
             using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "IvansSaveGameTest.txt")))
             {
-                foreach (string line in SaveFile)
+                foreach (string line in lines)
                     outputFile.WriteLine(line);
             }
+        }
+
+        public void TakeItem()
+        {
+            Console.WriteLine("What would you like to take?");
         }
 
         public static void exitGame()
@@ -340,7 +362,6 @@ namespace SimpleGame
             {
                 Console.WriteLine("Welcome! What would you like to do?");
                 Console.WriteLine("Type HELP if you would like some suggestions.");
-                
 
                 string userInput = Console.ReadLine();
 

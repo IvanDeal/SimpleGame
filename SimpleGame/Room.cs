@@ -17,8 +17,10 @@ namespace SimpleGame
         public string roomName;
         public Monster monster;
         public bool monsterDeadFlag = false;
+        public Item item;
+        public bool itemHasBeenTakenFlag = false;
 
-        public Room(string name, string north, string east, string south, string west, string up, string down, Monster monster)
+        public Room(string name, string north, string east, string south, string west, string up, string down, Monster monster, Item item)
         {
             /* Set the object's exit variables with the passed in strings */
             roomName = name;
@@ -29,6 +31,7 @@ namespace SimpleGame
             upExit = up;
             downExit = down;
             this.monster = monster;
+            this.item = item;
         }
 
         public string TryToExit(string direction)
@@ -71,6 +74,19 @@ namespace SimpleGame
             } else
             {
                 Console.WriteLine("No monster for you!");
+                return true;
+            }
+        }
+
+        public bool HasItemBeenTaken()
+        {
+            if (item != null && !itemHasBeenTakenFlag)
+            {
+
+                return false;
+            } else
+            {
+                Console.WriteLine("You have already taken that!");
                 return true;
             }
         }
