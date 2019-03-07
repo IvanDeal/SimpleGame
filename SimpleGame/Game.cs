@@ -346,7 +346,34 @@ namespace SimpleGame
 
         public void TakeItem()
         {
+            /*get the current room and item objects*/
+            Room currentRoom = roomList[currentRoomName];
+            Item currentItem = roomList[currentRoomName].item;
+
+            bool checkItemExists = currentRoom.HasItemBeenTaken();
+        
+            if (checkItemExists == false)
+            {
+
+            }
+            else if (checkItemExists == true)
+            {
+
+            }
+            else
+            {
+
+            }
+
+
+
             Console.WriteLine("What would you like to take?");
+            string itemToBeTaken = Console.ReadLine();
+
+            currentItemName = itemToBeTaken;
+
+
+
         }
 
         public static void exitGame()

@@ -86,7 +86,7 @@ namespace SimpleGame
                 return false;
             } else
             {
-                Console.WriteLine("You have already taken that!");
+                
                 return true;
             }
         }
