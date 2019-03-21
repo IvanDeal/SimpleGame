@@ -51,10 +51,13 @@ namespace SimpleGame
 
             Monster dragon = new Monster("Dragon", 50, 20, "Bite", "Tail Whip", "Fire Breath", null);
 
+            Item potion = new Item("Potion", "A simple healing potion");
+            Item apple = new Item("Apple", "It looks juicy and delicious");
+
             //Create Rooms
             /* Each room will be created with their name and the names of the rooms connected */
-            Room hallway = new Room("Hallway", "Kitchen", "empty", "empty", "empty", "empty", "empty", null, null);
-            Room kitchen = new Room("Kitchen", "Lounge", "empty", "Hallway", "empty", "empty", "empty", goblin, null);
+            Room hallway = new Room("Hallway", "Kitchen", "empty", "empty", "empty", "empty", "empty", null, potion);
+            Room kitchen = new Room("Kitchen", "Lounge", "empty", "Hallway", "empty", "empty", "empty", goblin, apple);
             Room lounge = new Room("Lounge", "empty", "empty", "Kitchen", "empty", "empty", "empty", dragon, null);
 
             /* Add rooms to the Dictionary, we'll need this later when changing rooms */
@@ -221,13 +224,11 @@ namespace SimpleGame
 
         public void equipItem()
         {
-            
 
             Console.WriteLine("What would you like to equip?");
             string equipItemInput = Console.ReadLine();
 
             currentItemName = equipItemInput;
-            
 
             //body part of if
             if (equipItemInput == "Leather Armour" || equipItemInput == "Iron Armour" || equipItemInput == "Steel Armour")
@@ -350,29 +351,46 @@ namespace SimpleGame
             Room currentRoom = roomList[currentRoomName];
             Item currentItem = roomList[currentRoomName].item;
 
-            bool checkItemExists = currentRoom.HasItemBeenTaken();
-        
-            if (checkItemExists == false)
-            {
-
-            }
-            else if (checkItemExists == true)
-            {
-
-            }
-            else
-            {
-
-            }
-
-
-
             Console.WriteLine("What would you like to take?");
             string itemToBeTaken = Console.ReadLine();
 
             currentItemName = itemToBeTaken;
+            /*Check whether an item exists in the room*/
+            bool checkItemExists = currentRoom.HasItemBeenTaken();
+
+            /*check player input matches the item that is there*/
+            for each(line in dict){
+
+            }
+
+            if (checkItemExists == false)
+            {
+                switch (currentItemName)
+                {
+                    case "potion":
+
+                        break;
+                    case "Ether":
+                        break;
+                    case "Apple":
+                        break;
+                    case "Dagger":
+                        break;
+                    case "key":
+                        break;
+                }
+            }
+            else if (checkItemExists == true)
+            {
+                Console.WriteLine("You have already taken " + currentItemName + "!");
+            }
+            else
+            {
+                Console.WriteLine("There is no " + currentItemName + " to take.");
+            }
 
 
+            
 
         }
 
@@ -424,6 +442,7 @@ namespace SimpleGame
                         player.checkStatus();
                         break;
                     case "take":
+                        TakeItem();
                         break;
                     case "talk":
                         break;
