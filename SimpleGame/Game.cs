@@ -11,6 +11,7 @@ namespace SimpleGame
     class Game
     {
         private Player player;
+        private Inventory inventory;
 
         /* Variable to store game rooms */
         private Dictionary<string, Room> roomList;
@@ -35,6 +36,7 @@ namespace SimpleGame
             loadWeapons();
             loadArmour();
             player = new Player();
+            inventory = new Inventory();
 
         }
 
@@ -200,7 +202,7 @@ namespace SimpleGame
             Console.WriteLine("Use: Type Use followed by the item you wish to use E.g. Use Potion");
         }
 
-        public void checkInventory()
+        /*public void checkInventory()
         {
             IDictionary<string, int> dict = new Dictionary<string, int>()
             {
@@ -220,7 +222,7 @@ namespace SimpleGame
 
             }
 
-        }
+        }*/
 
         public void equipItem()
         {
@@ -359,17 +361,14 @@ namespace SimpleGame
             bool checkItemExists = currentRoom.HasItemBeenTaken();
 
             /*check player input matches the item that is there*/
-            for each(line in dict){
-
-            }
+            
 
             if (checkItemExists == false)
             {
                 switch (currentItemName)
                 {
                     case "potion":
-
-                        break;
+                        //inventory.addItemtoInventory();
                     case "Ether":
                         break;
                     case "Apple":
@@ -431,7 +430,7 @@ namespace SimpleGame
                         helpList();
                         break;
                     case "inventory":
-                        checkInventory();
+                        inventory.checkInventory();
                         break;
                     case "load":
                         break;
