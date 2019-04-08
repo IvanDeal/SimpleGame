@@ -202,28 +202,6 @@ namespace SimpleGame
             Console.WriteLine("Use: Type Use followed by the item you wish to use E.g. Use Potion");
         }
 
-        /*public void checkInventory()
-        {
-            IDictionary<string, int> dict = new Dictionary<string, int>()
-            {
-                {"Potion", 0 },
-                {"Ether", 0 },
-                {"Apple", 0 },
-                {"Dagger", 0 },
-                {"Key", 0 }
-            };
-
-            foreach (KeyValuePair<string, int> pair in dict)
-            {
-                if (pair.Value > 0)
-                {
-                    Console.WriteLine(pair.Key.ToString() + " - " + pair.Value.ToString());
-                }
-
-            }
-
-        }*/
-
         public void equipItem()
         {
 
@@ -349,7 +327,7 @@ namespace SimpleGame
 
         public void TakeItem()
         {
-            /*get the current room and item objects*/
+          /*  get the current room and item objects
             Room currentRoom = roomList[currentRoomName];
             Item currentItem = roomList[currentRoomName].item;
 
@@ -357,10 +335,10 @@ namespace SimpleGame
             string itemToBeTaken = Console.ReadLine();
 
             currentItemName = itemToBeTaken;
-            /*Check whether an item exists in the room*/
+            /*Check whether an item exists in the room
             bool checkItemExists = currentRoom.HasItemBeenTaken();
 
-            /*check player input matches the item that is there*/
+            check player input matches the item that is there
             
 
             if (checkItemExists == false)
@@ -389,7 +367,7 @@ namespace SimpleGame
             }
 
 
-            
+            */
 
         }
 

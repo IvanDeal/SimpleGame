@@ -22,7 +22,6 @@ namespace SimpleGame
         public void createInventory()
         {
             inventoryList = new Dictionary<string, int>();
-
         }
 
         public void checkInventory()
@@ -38,9 +37,22 @@ namespace SimpleGame
             }
         }
 
-        public void addItemtoInventory(Item item)
+        public int addItemtoInventory(Item item)
         {
-            inventoryList.Add(item.sItemName, 1);
+            if (inventoryList != null)
+            {
+                for (int i = 0; i < inventoryList.Length; i++)
+                {
+                    if (inventoryList[i] == null)
+                    {
+                        inventoryList[i] = item;
+                        return i;
+                    }
+                }
+            }
+            return -1;
+
+            //inventoryList.Add(item.sItemName, 1);
         }
 
         public void removeItemFromInventory()
