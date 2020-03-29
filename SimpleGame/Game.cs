@@ -283,33 +283,9 @@ namespace SimpleGame
 
         }
 
-        /*public struct SaveData
-        {
-            public string headItemName;
-            public string headItemValue;
-            public string thirdLine;
-        }
-
-        byte[] getBytes(SaveData SaveData)
-        {
-            int length = Marshal.SizeOf(SaveData);
-            byte[] arr = new byte[length];
-
-            IntPtr ptr = Marshal.AllocHGlobal(length);
-            Marshal.StructureToPtr(length, ptr, true);
-            Marshal.Copy(ptr, arr, 0, length);
-            Marshal.FreeHGlobal(ptr);
-
-            return arr;
-        }*/
-
         public void SaveGame()
         {
-            /*SaveData SaveData;
 
-            SaveData.headItemName = player.sHeadItemName;
-            SaveData.headItemValue = player.iHeadItemArmour.ToString();
-            SaveData.thirdLine = "Last Piece of Test Data";*/
 
             string headItemName;
             string headItemValue;
@@ -323,52 +299,6 @@ namespace SimpleGame
                 foreach (string line in lines)
                     outputFile.WriteLine(line);
             }
-        }
-
-        public void TakeItem()
-        {
-          /*  get the current room and item objects
-            Room currentRoom = roomList[currentRoomName];
-            Item currentItem = roomList[currentRoomName].item;
-
-            Console.WriteLine("What would you like to take?");
-            string itemToBeTaken = Console.ReadLine();
-
-            currentItemName = itemToBeTaken;
-            /*Check whether an item exists in the room
-            bool checkItemExists = currentRoom.HasItemBeenTaken();
-
-            check player input matches the item that is there
-            
-
-            if (checkItemExists == false)
-            {
-                switch (currentItemName)
-                {
-                    case "potion":
-                        //inventory.addItemtoInventory();
-                    case "Ether":
-                        break;
-                    case "Apple":
-                        break;
-                    case "Dagger":
-                        break;
-                    case "key":
-                        break;
-                }
-            }
-            else if (checkItemExists == true)
-            {
-                Console.WriteLine("You have already taken " + currentItemName + "!");
-            }
-            else
-            {
-                Console.WriteLine("There is no " + currentItemName + " to take.");
-            }
-
-
-            */
-
         }
 
         public static void exitGame()
@@ -389,8 +319,6 @@ namespace SimpleGame
 
                 string trimmedInput = userInput.Trim();
                 string convertedInput = trimmedInput.ToLower();
-
-                //string currentLevelDescription = currentRoom.room
 
                 switch (convertedInput)
                 {

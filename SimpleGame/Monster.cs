@@ -145,7 +145,6 @@ namespace SimpleGame
             attackTwoName = attackTwo;
             attackThreeName = attackThree;
             attackFourName = attackFour;
-            //printMonsterStatBlock();
 
         }
 

@@ -11,7 +11,6 @@ namespace SimpleGame
         public string sItemName;
         public string sItemDescription;
         public int iItemQuantity;
-        //private IEnumerable<KeyValuePair<string, int>> dict;
         public Dictionary<string, int> inventoryList;
 
         public Inventory()
@@ -52,7 +51,6 @@ namespace SimpleGame
             }
             return -1;
 
-            //inventoryList.Add(item.sItemName, 1);
         }
 
         public void removeItemFromInventory()
